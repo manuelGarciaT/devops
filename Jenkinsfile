@@ -1,22 +1,30 @@
 pipeline {
     agent any
     stages {
-        stage('instalar dependencias') {
+        stage ("pipeline node") {
+
+            stages {
+                stage("checkout") {
+                    steps {
+                        checkout scm
+                    }
+                }
+                stage('instalar dependencias') {
                     steps {
                         sh 'npm install'
                     }
                 }
-        stage('ejecutar test') {
-                
+                stage('ejecutar test') {
                     steps {
                         sh 'npm run test'
                     }
                 }
-        stage('hacer build') {
-                
+                stage('hacer build'){
                     steps {
                         sh 'npm run build'
                     }
                 }
             }
         }
+    }
+}
